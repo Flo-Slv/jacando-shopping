@@ -23,10 +23,14 @@ MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jac
 npm run dev
 ```
 
+---
+
 ## Dependencies
 ```sh
 npm install @apollo/server express graphql cors body-parser mongoose
 ```
+
+---
 
 ## Dev dependencies
 ```sh
