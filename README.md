@@ -7,7 +7,19 @@ A small shopping page with Node.js, Express, Apollo server/client, GraphQL and R
 ```sh
 git clone git@github.com:Flo-Slv/jacando-shopping.git && \
 cd jacando-shopping && \
-npm install && \
+npm install
+```
+
+<br />
+
+Create `.env` file
+```env
+MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jacando-shopping?retryWrites=true&w=majority
+```
+
+<br />
+
+```sh
 npm run dev
 ```
 
