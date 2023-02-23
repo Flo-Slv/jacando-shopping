@@ -64,5 +64,10 @@ nodemon
 ### Frontend
 Dependencies
 ```sh
-vite@latest @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled
+@apollo/client react-router-dom @mui/material @emotion/react @emotion/styled
+```
+
+Dev dependencies
+```sh
+vite@latest tailwindcss postcss autoprefixer
 ```
