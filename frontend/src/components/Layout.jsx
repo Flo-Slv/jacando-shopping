@@ -104,7 +104,7 @@ const Layout = () => {
       <div className="w-full h-full flex flex-col justify-between">
         <header className="h-16 w-full flex items-center relative justify-between px-5 space-x-10 bg-gray-800">
           <div>
-            <img src="../../public/jacando_logo.png" width={160} />
+            <img src="/jacando_logo.png" width={160} />
           </div>
 
           <div>
@@ -125,7 +125,7 @@ const Layout = () => {
 
             <div>
               <img
-                src="../../public/ivana.jpeg"
+                src="/ivana.jpeg"
                 className="h-10 w-10 rounded-full object-cover"
               />
             </div>
