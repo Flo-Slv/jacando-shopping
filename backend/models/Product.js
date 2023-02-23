@@ -1,11 +1,15 @@
 import { model, Schema } from "mongoose";
 
 const productSchema = new Schema({
-  price: Number,
+  name: String,
   description: String,
-  createdAt: String,
+  unitPrice: Number, // Float
   stock: Number,
-  type: String,
+  category: {
+    type: String,
+    enum: ["vegetable", "fruit", "cheese"],
+  },
+  picture: String,
 });
 
 export default model("Product", productSchema);
