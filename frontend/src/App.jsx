@@ -1,5 +1,11 @@
+import Layout from "./components/Layout.jsx";
+
 const App = () => {
-  return <div className="flex justify-center">Jacando test shopping !</div>;
+  return (
+    <div className="h-screen w-full bg-white relative flex overflow-hidden">
+      <Layout />
+    </div>
+  );
 };
 
 export default App;
