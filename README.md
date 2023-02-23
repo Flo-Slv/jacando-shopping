@@ -1,12 +1,17 @@
 # jacando-shopping
 A small shopping page with Node.js, Express, Apollo server/client, GraphQL and React.js
 
+<br />
+
 ---
 
+
+<br />
+
 ## Run project in dev
+### Backend
 ```sh
-git clone git@github.com:Flo-Slv/jacando-shopping.git && \
-cd jacando-shopping && \
+cd jacando-shopping/backend && \
 npm install
 ```
 
@@ -23,16 +28,37 @@ MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jac
 npm run dev
 ```
 
----
+<br />
 
-## Dependencies
+### Frontend
 ```sh
-npm install @apollo/server express graphql cors body-parser mongoose
+cd jacando-shopping/frontend && \
+npm install && \
+npm run dev
 ```
 
+<br />
+
 ---
 
-## Dev dependencies
+<br />
+
+## Dependencies
+### Backend
+Dependencies
 ```sh
-npm install --save-dev nodemon
+@apollo/server express graphql cors body-parser mongoose
+```
+
+Dev dependencies
+```sh
+nodemon
+```
+
+<br />
+
+### Frontend
+Dependencies
+```sh
+vite@latest
 ```
