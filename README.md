@@ -1,5 +1,9 @@
 # jacando-shopping
-A small shopping page with Node.js, Express, Apollo server/client, GraphQL and React.js
+A small shopping page.
+
+Backend: Node.js, Express, Apollo server and GraphQL.
+
+Frontend: Vite.js, Apollo client and React.js
 
 <br />
 
