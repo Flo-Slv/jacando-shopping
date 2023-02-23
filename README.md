@@ -3,7 +3,7 @@ A small shopping page.
 
 Backend: Node.js, Express, Apollo server and GraphQL.
 
-Frontend: Vite.js, Apollo client, React router dom and React.js
+Frontend: Vite.js, Apollo client, React router dom, React.js and Material UI.
 
 <br />
 
@@ -64,5 +64,5 @@ nodemon
 ### Frontend
 Dependencies
 ```sh
-vite@latest @apollo/client react-router-dom
+vite@latest @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled
 ```
