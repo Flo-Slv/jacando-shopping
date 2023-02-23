@@ -1,4 +1,4 @@
-# jacando-shopping
+# Jacando shopping
 A small shopping page.
 
 Backend: Node.js, Express, Apollo server and GraphQL.
