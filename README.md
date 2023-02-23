@@ -3,7 +3,7 @@ A small shopping page.
 
 Backend: Node.js, Express, Apollo server and GraphQL.
 
-Frontend: Vite.js, Apollo client and React.js
+Frontend: Vite.js, Apollo client, React router dom and React.js
 
 <br />
 
