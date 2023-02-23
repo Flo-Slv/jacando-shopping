@@ -64,5 +64,5 @@ nodemon
 ### Frontend
 Dependencies
 ```sh
-vite@latest
+vite@latest @apollo/client
 ```
