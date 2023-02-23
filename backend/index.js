@@ -37,7 +37,7 @@ app.use(
 );
 
 // DB setup + connection.
-mongoose.set("strictQuery", false); // To avoid warning in terminal.
+mongoose.set("strictQuery", Boolean(false)); // To avoid warning in terminal.
 mongoose.connect(process.env.MONGODB).then(async () => {
   console.log("MongoDB connected !");
 
