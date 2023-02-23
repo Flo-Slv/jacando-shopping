@@ -1,8 +1,13 @@
 import ReactDOM from "react-dom/client";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
-import App from "./App.jsx";
+import Layout from "./components/Layout.jsx";
 import Loader from "./components/Loader.jsx";
 
 import "./styles/index.css";
@@ -12,20 +17,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/vegetables",
-    element: <App />,
-  },
-  {
-    path: "/fruits",
-    element: <App />,
-  },
-  {
-    path: "/cheeses",
-    element: <App />,
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Layout />}>
+      <Route path="/vegetables" element={<div>Vegetables</div>} />
+      <Route path="/fruits" element={<div>Fruits</div>} />
+      <Route path="/cheeses" element={<div>Cheeses</div>} />
+    </Route>
+  )
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ApolloProvider client={client}>
