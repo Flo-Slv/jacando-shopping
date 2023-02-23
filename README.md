@@ -64,5 +64,5 @@ nodemon
 ### Frontend
 Dependencies
 ```sh
-vite@latest @apollo/client
+vite@latest @apollo/client react-router-dom
 ```
