@@ -1,15 +1,18 @@
 const typeDefs = `
   type Product {
     id: ID!
+		name: String!
     description: String!
-    createdAt: String!
+    unitPrice: Float!
     stock: Int!
-    type: String!
+    category: String!
+		picture: String!
   }
 
   type Query {
     getProducts: [Product]
-		getProduct(productId: ID!): Product
+		getProductById(productId: ID!): Product
+		getProductsByCategory(category: String!): [Product]
   }
 `;
 
