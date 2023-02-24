@@ -28,7 +28,7 @@ const Products = ({ cat }) => {
           ({ id, name, description, category, picture, unitPrice }) => (
             <div
               key={id}
-              className="w-full sm:w-full md:w-1/3 xl:w-1/4 p-4 mb-14"
+              className="w-full sm:w-1/3 md:w-1/4 xl:w-1/5 2xl:w-1/6 mb-14"
             >
               <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
                 <div className="relative pb-48 overflow-hidden">
