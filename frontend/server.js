@@ -24,9 +24,10 @@ const createServer = async () => {
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
+    // Custom redirect.
+    // Redirect if URL not permit.
     const validUrls = ["/vegetables", "/fruits", "/cheeses"];
 
-    // Redirect if URL not valid.
     if (!validUrls.includes(url)) {
       res.redirect("/vegetables");
       return;
