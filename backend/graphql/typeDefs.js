@@ -1,4 +1,4 @@
-const typeDefs = `
+const typeDefs = `#graphql
   type Product {
     id: ID!
 		name: String!
@@ -10,9 +10,9 @@ const typeDefs = `
   }
 
   type Query {
-    getProducts: [Product]
+    getProducts: [Product!]
 		getProductById(productId: ID!): Product
-		getProductsByCategory(category: String!): [Product]
+		getProductsByCategory(offset: Int!, limit: Int!, category: String!): [Product!]
   }
 `;
 
