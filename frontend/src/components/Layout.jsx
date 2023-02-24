@@ -4,12 +4,16 @@ import clsx from "clsx";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+import Products from "./Products.jsx";
 import Cart from "./Cart.jsx";
 
 const Layout = () => {
   const [displayCart, setDisplayCart] = useState(Boolean(false));
+  const [displayProducts, setDisplayProducts] = useState("vegetable");
 
   const handleCloseCart = () => setDisplayCart(Boolean(false));
+
+  const handleClickLink = (path) => setDisplayProducts(path);
 
   return (
     <div className="h-screen w-full bg-white relative flex overflow-hidden">
@@ -19,7 +23,7 @@ const Layout = () => {
           "bg-gray-800 text-white"
         )}
       >
-        <Link to="vegetables">
+        <Link to="vegetables" onClick={() => handleClickLink("vegetable")}>
           <div
             className={clsx(
               "h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer",
@@ -43,7 +47,7 @@ const Layout = () => {
           </div>
         </Link>
 
-        <Link to={"fruits"}>
+        <Link to={"fruits"} onClick={() => handleClickLink("fruit")}>
           <div
             className={clsx(
               "h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer",
@@ -67,7 +71,7 @@ const Layout = () => {
           </div>
         </Link>
 
-        <Link to={"cheeses"}>
+        <Link to={"cheeses"} onClick={() => handleClickLink("cheese")}>
           <div
             className={clsx(
               "h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer",
@@ -138,13 +142,17 @@ const Layout = () => {
         </header>
 
         <main className="max-w-full h-full flex relative overflow-y-hidden">
-          <div className="h-full w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll">
-            <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-            <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-            <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-            <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-            <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-          </div>
+          {displayProducts && displayProducts === "vegetable" && (
+            <Products cat="vegetable" />
+          )}
+
+          {displayProducts && displayProducts === "fruit" && (
+            <Products cat="fruit" />
+          )}
+
+          {displayProducts && displayProducts === "cheese" && (
+            <Products cat="cheese" />
+          )}
         </main>
 
         {displayCart && (

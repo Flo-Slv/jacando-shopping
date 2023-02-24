@@ -9,6 +9,7 @@ import {
 
 import Layout from "./components/Layout.jsx";
 import Loader from "./components/Loader.jsx";
+import Products from "./components/Products.jsx";
 
 import "./styles/index.css";
 
@@ -20,9 +21,9 @@ const client = new ApolloClient({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
-      <Route path="/vegetables" element={<div>Vegetables</div>} />
-      <Route path="/fruits" element={<div>Fruits</div>} />
-      <Route path="/cheeses" element={<div>Cheeses</div>} />
+      <Route path="/vegetables" element={<Products cat="vegetable" />} />
+      <Route path="/fruits" element={<Products cat="fruit" />} />
+      <Route path="/cheeses" element={<Products cat="cheese" />} />
     </Route>
   )
 );
