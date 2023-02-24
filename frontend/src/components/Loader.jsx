@@ -1,11 +1,10 @@
-import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
 const Loader = () => {
   return (
-    <Stack sx={{ width: "70%", color: "grey.500" }} spacing={2}>
-      <LinearProgress color="secondary" />
-    </Stack>
+    <div className="flex items-center justify-center h-full w-full">
+      <LinearProgress className="w-32 md:w-52" color="secondary" />
+    </div>
   );
 };
 
