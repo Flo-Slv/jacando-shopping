@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import useCart from "../utils/zustand/store.js";
 
 import Products from "./Products.jsx";
 import Cart from "./Cart.jsx";
@@ -10,6 +13,8 @@ import Cart from "./Cart.jsx";
 const Layout = () => {
   const [displayCart, setDisplayCart] = useState(Boolean(false));
   const [displayProducts, setDisplayProducts] = useState("vegetable");
+
+  const cart = useCart((state) => state.cart);
 
   const handleCloseCart = () => setDisplayCart(Boolean(false));
 
@@ -116,13 +121,19 @@ const Layout = () => {
             <img src="/jacando_logo.png" width={160} />
           </div>
 
-          <div>
+          {cart.length ? (
+            <AddShoppingCartIcon
+              sx={{ color: "white" }}
+              onClick={() => setDisplayCart(Boolean(true))}
+              className={"cursor-pointer"}
+            />
+          ) : (
             <ShoppingCartIcon
               sx={{ color: "white" }}
               onClick={() => setDisplayCart(Boolean(true))}
               className={"cursor-pointer"}
             />
-          </div>
+          )}
 
           <div className="flex flex-shrink-0 items-center space-x-4 text-white">
             <div className="flex flex-col items-end ">

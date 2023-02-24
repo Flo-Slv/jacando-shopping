@@ -22,23 +22,20 @@ const Products = ({ cat }) => {
     variables: { category: cat },
   });
 
-  const cart = useCart((state) => state.cart);
   const addToCart = useCart((state) => state.addToCart);
 
   if (loading) return <Loader />;
 
   if (error) return <Error error={error} />;
 
-  const handleClickCart = (id, name, unitPrice) => {
-    addToCart(id, name, unitPrice);
+  const handleClickCart = (id, name, category, unitPrice) => {
+    addToCart(id, name, category, unitPrice);
 
     setDisplayAddToCart({
       display: Boolean(true),
       name: name,
     });
   };
-
-  console.log("cart: ", cart);
 
   return (
     <div
@@ -54,7 +51,12 @@ const Products = ({ cat }) => {
               key={id}
               className="w-full sm:w-1/3 md:w-1/4 xl:w-1/5 2xl:w-1/6 mb-14"
             >
-              <div className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+              <div
+                className={clsx(
+                  "block overflow-hidden rounded-lg",
+                  "bg-white shadow-md hover:shadow-xl"
+                )}
+              >
                 <div className="relative pb-48 overflow-hidden">
                   <img
                     className="absolute inset-0 h-full w-full object-cover"
@@ -64,7 +66,13 @@ const Products = ({ cat }) => {
                 </div>
 
                 <div className="p-4">
-                  <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                  <span
+                    className={clsx(
+                      "inline-block px-2 py-1",
+                      "bg-orange-200 text-orange-800 rounded-full",
+                      "leading-none tracking-wide text-xs font-semibold uppercase"
+                    )}
+                  >
                     {category}
                   </span>
 
@@ -86,8 +94,11 @@ const Products = ({ cat }) => {
                 </div>
 
                 <div
-                  className="p-2 border-t border-b text-xs text-gray-700 hover:cursor-pointer"
-                  onClick={() => handleClickCart(id, name, unitPrice)}
+                  className={clsx(
+                    "p-2 border-t border-b",
+                    "text-xs text-gray-700 hover:cursor-pointer"
+                  )}
+                  onClick={() => handleClickCart(id, name, category, unitPrice)}
                 >
                   <span className="flex items-center justify-center">
                     <ShoppingCartIcon />

@@ -2,14 +2,24 @@ import { create } from "zustand";
 
 export const useCart = create((set) => ({
   cart: [],
-  addToCart: (id, name, unitPrice) =>
+  addToCart: (id, name, category, unitPrice) =>
     set((state) => {
       const isPresent = state.cart.find((product) => product.id === id);
 
       if (!isPresent) {
         return {
           ...state,
-          cart: [...state.cart, { id, name, count: 1, price: unitPrice }],
+          cart: [
+            ...state.cart,
+            {
+              id,
+              name,
+              category,
+              count: 1,
+              unitPrice: unitPrice,
+              total: unitPrice,
+            },
+          ],
         };
       }
 
@@ -18,7 +28,7 @@ export const useCart = create((set) => ({
           ? {
               ...product,
               count: product.count + 1,
-              price: unitPrice * (product.count + 1),
+              total: unitPrice * (product.count + 1),
             }
           : product
       );
