@@ -9,6 +9,7 @@ const GET_PRODUCTS_BY_CATEGORY = gql`
       category
       picture
       unitPrice
+      stock
     }
   }
 `;

@@ -1,20 +1,44 @@
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import clsx from "clsx";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import GET_PRODUCTS_BY_CATEGORY from "../graphql/queries/getProductsByCategory.js";
 
-import Loader from "../components/Loader.jsx";
+import useCart from "../utils/zustand/store.js";
+
+import Loader from "./Loader.jsx";
 import Error from "./Error.jsx";
+import Success from "./Success.jsx";
 
 const Products = ({ cat }) => {
+  const [displayAddToCart, setDisplayAddToCart] = useState({
+    display: Boolean(false),
+    name: "",
+  });
+
   const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     variables: { category: cat },
   });
 
+  const cart = useCart((state) => state.cart);
+  const addToCart = useCart((state) => state.addToCart);
+
   if (loading) return <Loader />;
 
   if (error) return <Error error={error} />;
+
+  const handleClickCart = (id, name, unitPrice) => {
+    addToCart(id, name, unitPrice);
+
+    setDisplayAddToCart({
+      display: Boolean(true),
+      name: name,
+    });
+  };
+
+  console.log("cart: ", cart);
 
   return (
     <div
@@ -25,7 +49,7 @@ const Products = ({ cat }) => {
     >
       {data &&
         data?.getProductsByCategory.map(
-          ({ id, name, description, category, picture, unitPrice }) => (
+          ({ id, name, description, category, picture, unitPrice, stock }) => (
             <div
               key={id}
               className="w-full sm:w-1/3 md:w-1/4 xl:w-1/5 2xl:w-1/6 mb-14"
@@ -49,12 +73,22 @@ const Products = ({ cat }) => {
                   <p className="text-sm">{description}</p>
 
                   <div className="mt-3 flex items-center">
-                    <span className="font-bold text-xl">{unitPrice}</span>&nbsp;
-                    <span className="text-sm font-semibold">€</span>
+                    <span className="font-bold text-xl">{unitPrice}</span>
+                    &nbsp;
+                    <span className="text-sm font-semibold">€ / unit</span>
+                  </div>
+
+                  <div className="mt-3 flex items-center">
+                    <span className="text-sm font-semibold">
+                      {stock} in stock
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-2 border-t border-b text-xs text-gray-700 hover:cursor-pointer">
+                <div
+                  className="p-2 border-t border-b text-xs text-gray-700 hover:cursor-pointer"
+                  onClick={() => handleClickCart(id, name, unitPrice)}
+                >
                   <span className="flex items-center justify-center">
                     <ShoppingCartIcon />
                   </span>
@@ -63,6 +97,13 @@ const Products = ({ cat }) => {
             </div>
           )
         )}
+
+      {displayAddToCart.display && (
+        <Success
+          name={displayAddToCart.name}
+          setDisplayAddToCart={setDisplayAddToCart}
+        />
+      )}
     </div>
   );
 };
