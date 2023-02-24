@@ -12,7 +12,7 @@ const typeDefs = `#graphql
   type Query {
     getProducts: [Product!]
 		getProductById(productId: ID!): Product
-		getProductsByCategory(offset: Int!, limit: Int!, category: String!): [Product!]
+		getProductsByCategory(category: String!): [Product!]
   }
 `;
 
