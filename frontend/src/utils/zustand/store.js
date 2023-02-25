@@ -28,7 +28,7 @@ export const useCart = create((set) => ({
           ? {
               ...product,
               count: product.count + 1,
-              total: unitPrice * (product.count + 1),
+              total: Math.round(unitPrice * (product.count + 1) * 100) / 100,
             }
           : product
       );
