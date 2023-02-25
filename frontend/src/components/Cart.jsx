@@ -15,18 +15,28 @@ import ShopIcon from "@mui/icons-material/Shop";
 
 import useCart from "../utils/zustand/store.js";
 
+const filterCategory = (cart, product) => {
+  return cart.filter((el) => el.category === product);
+};
+
+const getTotal = (cart) => {
+  const res = cart.reduce((acc, curr) => {
+    return (acc += curr.total);
+  }, 0);
+
+  return Math.round(res * 100) / 100;
+};
+
 const Cart = ({ openCart, closeCart }) => {
   const [isOpen, setIsOpen] = useState(openCart);
 
   const cart = useCart((state) => state.cart);
 
-  const vegetables = cart.filter((el) => el.category === "vegetable");
-  const fruits = cart.filter((el) => el.category === "fruit");
-  const cheeses = cart.filter((el) => el.category === "cheese");
+  const vegetables = filterCategory(cart, "vegetable");
+  const fruits = filterCategory(cart, "fruit");
+  const cheeses = filterCategory(cart, "fruit");
 
-  const total = cart.reduce((acc, curr) => {
-    return (acc += curr.total);
-  }, 0);
+  const total = getTotal(cart);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -56,6 +66,16 @@ const Cart = ({ openCart, closeCart }) => {
           }
         ></List>
 
+        {vegetables.length === 0 &&
+        fruits.length === 0 &&
+        cheeses.length === 0 ? (
+          <List>
+            <ListItem key={"empty"} className="flex justify-center mt-2">
+              Empty cart
+            </ListItem>
+          </List>
+        ) : null}
+
         {vegetables.length === 0 ? null : (
           <List>
             <ListItem key={"vegetables"} disablePadding>
@@ -83,12 +103,27 @@ const Cart = ({ openCart, closeCart }) => {
             <Divider />
 
             {vegetables.map((el) => (
-              <ListItem key={el.id} disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`${el.name}: ${el.unitPrice} * ${el.count} = ${el.total} euro`}
-                  />
-                </ListItemButton>
+              <ListItem
+                key={el.id}
+                className="flex justify-between pl-4 pr-4 pt-2 pb-2"
+                disablePadding
+              >
+                <div className="pr-4">{`${el.name}: ${el.unitPrice} € x ${el.count}`}</div>
+
+                <div>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    color="error"
+                    className="mr-2"
+                  >
+                    -
+                  </Button>
+
+                  <Button variant="outlined" size="small">
+                    +
+                  </Button>
+                </div>
               </ListItem>
             ))}
           </List>
@@ -121,12 +156,12 @@ const Cart = ({ openCart, closeCart }) => {
             <Divider />
 
             {fruits.map((el) => (
-              <ListItem key={el.id} disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`${el.name}: ${el.unitPrice} * ${el.count} = ${el.total}`}
-                  />
-                </ListItemButton>
+              <ListItem
+                key={el.id}
+                className="flex justify-center"
+                disablePadding
+              >
+                {`${el.name}: ${el.unitPrice} € x ${el.count}`}
               </ListItem>
             ))}
           </List>
@@ -174,11 +209,7 @@ const Cart = ({ openCart, closeCart }) => {
 
             {cheeses.map((el) => (
               <ListItem key={el.id} disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`${el.name}: ${el.unitPrice} * ${el.count} = ${el.total} euro`}
-                  />
-                </ListItemButton>
+                {`${el.name}: ${el.unitPrice} € x ${el.count}`}
               </ListItem>
             ))}
           </List>
@@ -197,13 +228,23 @@ const Cart = ({ openCart, closeCart }) => {
 
             <Divider />
 
-            <ListItem key={"sum"} className="flex justify-center mt-2 mb-2">
-              {total} euro
+            <ListItem key={"sum"} className="flex justify-center mt-2">
+              {total} €
             </ListItem>
 
             <ListItem key={"buy"} className="flex justify-center">
               <Button variant="outlined" color="secondary">
                 BUY
+              </Button>
+            </ListItem>
+
+            <ListItem key={"close"} className="flex justify-center mt-11">
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={toggleDrawer(Boolean(false))}
+              >
+                GO BACK
               </Button>
             </ListItem>
           </List>
