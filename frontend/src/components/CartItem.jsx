@@ -10,12 +10,10 @@ const CartItem = ({ el }) => {
   const removeFromCart = useCart((state) => state.removeFromCart);
 
   const handleClickPlus = (id, name, category, unitPrice) => {
-    console.log("PLUS id: ", id);
+    addToCart(id, name, category, unitPrice);
   };
 
-  const handleClickMinus = (id) => {
-    console.log("MINUS id: ", id);
-  };
+  const handleClickMinus = (id, unitPrice) => removeFromCart(id, unitPrice);
 
   return (
     <ListItem
@@ -30,7 +28,7 @@ const CartItem = ({ el }) => {
           size="small"
           color="error"
           className="mr-2"
-          onClick={() => handleClickMinus(id)}
+          onClick={() => handleClickMinus(id, unitPrice)}
         >
           -
         </Button>

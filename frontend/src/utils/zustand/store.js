@@ -38,7 +38,7 @@ export const useCart = create((set) => ({
         cart: updatedCart,
       };
     }),
-  removeFromCart: (id) =>
+  removeFromCart: (id, unitPrice) =>
     set((state) => {
       const isPresent = state.cart.findIndex((product) => product.id === id);
 
@@ -51,7 +51,11 @@ export const useCart = create((set) => ({
       const updatedCart = state.cart
         .map((product) =>
           product.id === id
-            ? { ...product, count: Math.max(product.count - 1, 0) }
+            ? {
+                ...product,
+                count: Math.max(product.count - 1, 0),
+                total: Math.round(unitPrice * (product.count - 1) * 100) / 100,
+              }
             : product
         )
         .filter((product) => product.count);
