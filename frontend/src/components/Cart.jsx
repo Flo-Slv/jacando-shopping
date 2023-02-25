@@ -15,6 +15,8 @@ import ShopIcon from "@mui/icons-material/Shop";
 
 import useCart from "../utils/zustand/store.js";
 
+import CartItem from "./CartItem.jsx";
+
 const filterCategory = (cart, product) => {
   return cart.filter((el) => el.category === product);
 };
@@ -34,7 +36,7 @@ const Cart = ({ openCart, closeCart }) => {
 
   const vegetables = filterCategory(cart, "vegetable");
   const fruits = filterCategory(cart, "fruit");
-  const cheeses = filterCategory(cart, "fruit");
+  const cheeses = filterCategory(cart, "cheese");
 
   const total = getTotal(cart);
 
@@ -103,28 +105,7 @@ const Cart = ({ openCart, closeCart }) => {
             <Divider />
 
             {vegetables.map((el) => (
-              <ListItem
-                key={el.id}
-                className="flex justify-between pl-4 pr-4 pt-2 pb-2"
-                disablePadding
-              >
-                <div className="pr-4">{`${el.name}: ${el.unitPrice} € x ${el.count}`}</div>
-
-                <div>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    color="error"
-                    className="mr-2"
-                  >
-                    -
-                  </Button>
-
-                  <Button variant="outlined" size="small">
-                    +
-                  </Button>
-                </div>
-              </ListItem>
+              <CartItem key={el.id} el={el} />
             ))}
           </List>
         )}
@@ -156,13 +137,7 @@ const Cart = ({ openCart, closeCart }) => {
             <Divider />
 
             {fruits.map((el) => (
-              <ListItem
-                key={el.id}
-                className="flex justify-center"
-                disablePadding
-              >
-                {`${el.name}: ${el.unitPrice} € x ${el.count}`}
-              </ListItem>
+              <CartItem key={el.id} el={el} />
             ))}
           </List>
         )}
@@ -208,9 +183,7 @@ const Cart = ({ openCart, closeCart }) => {
             <Divider />
 
             {cheeses.map((el) => (
-              <ListItem key={el.id} disablePadding>
-                {`${el.name}: ${el.unitPrice} € x ${el.count}`}
-              </ListItem>
+              <CartItem key={el.id} el={el} />
             ))}
           </List>
         )}
@@ -232,21 +205,23 @@ const Cart = ({ openCart, closeCart }) => {
               {total} €
             </ListItem>
 
-            <ListItem key={"buy"} className="flex justify-center">
-              <Button variant="outlined" color="secondary">
-                BUY
-              </Button>
-            </ListItem>
+            <div className="flex">
+              <ListItem key={"buy"} className="flex justify-center">
+                <Button variant="outlined" color="secondary">
+                  BUY
+                </Button>
+              </ListItem>
 
-            <ListItem key={"close"} className="flex justify-center mt-11">
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={toggleDrawer(Boolean(false))}
-              >
-                GO BACK
-              </Button>
-            </ListItem>
+              <ListItem key={"close"} className="flex justify-center">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={toggleDrawer(Boolean(false))}
+                >
+                  GO BACK
+                </Button>
+              </ListItem>
+            </div>
           </List>
         )}
       </Box>
