@@ -1,13 +1,18 @@
 import { model, Schema } from "mongoose";
 
-// TODO:
-// Relation with Product !
 const orderSchema = new Schema({
-  username: String,
-  totalPrice: Number,
-  currency: String,
-  // products: [],
+  userName: String,
   createdAt: String,
+  currency: String,
+  totalPrice: Number,
+  products: [
+    {
+      productId: String,
+      category: String,
+      count: Number,
+      unitPrice: Number,
+    },
+  ],
 });
 
 export default model("Order", orderSchema);
