@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -12,8 +12,15 @@ import Cart from "./Cart.jsx";
 import Success from "./Success.jsx";
 
 const Layout = () => {
+  const location = useLocation();
+
+  const currentPage = location.pathname.substring(
+    1,
+    location.pathname.length - 1
+  );
+
   const [displayCart, setDisplayCart] = useState(Boolean(false));
-  const [displayProducts, setDisplayProducts] = useState("vegetable");
+  const [displayProducts, setDisplayProducts] = useState(currentPage);
   const [displaySuccess, setDisplaySuccess] = useState({
     display: Boolean(false),
     type: "",
