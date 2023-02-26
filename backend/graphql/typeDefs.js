@@ -21,7 +21,7 @@ const typeDefs = `#graphql
 		id: ID!
 		createdAt: String!
 		currency: String
-		totalPrice: Int!
+		totalPrice: Float!
 		products: [OrderProduct!]
 	}
 
@@ -39,7 +39,7 @@ const typeDefs = `#graphql
   }
 
 	type Mutation {
-		createOrder(username: String!, currency: String!, totalPrice: Int!, products: [ProductOrder!]!): Order!
+		createOrder(userName: String!, currency: String!, totalPrice: Float!, products: [ProductOrder!]!): Order!
 	}
 `;
 

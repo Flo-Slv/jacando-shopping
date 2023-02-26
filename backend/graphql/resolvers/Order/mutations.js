@@ -3,7 +3,7 @@ import Order from "../../../models/Order.js";
 
 const orderMutations = {
   Mutation: {
-    createOrder: async (_, { username, currency, totalPrice, products }) => {
+    createOrder: async (_, { userName, currency, totalPrice, products }) => {
       try {
         // To avoid duplicate products.
         const productsWithoutDuplicate = products.filter(
@@ -39,7 +39,7 @@ const orderMutations = {
 
         // Create order in DB.
         const newOrder = new Order({
-          userName: username,
+          userName: userName,
           createdAt: new Date().toISOString(),
           currency: currency,
           totalPrice: totalPrice,
