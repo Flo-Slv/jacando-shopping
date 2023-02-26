@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -14,8 +15,10 @@ import Button from "@mui/material/Button";
 import ShopIcon from "@mui/icons-material/Shop";
 
 import useCart from "../utils/zustand/store.js";
+import CREATE_ORDER from "../graphql/mutations/createOrder.js";
 
 import CartItem from "./CartItem.jsx";
+import Error from "./Error.jsx";
 
 const filterCategory = (cart, product) => {
   return cart.filter((el) => el.category === product);
@@ -33,12 +36,25 @@ const Cart = ({ openCart, closeCart }) => {
   const [isOpen, setIsOpen] = useState(openCart);
 
   const cart = useCart((state) => state.cart);
+  const clearCart = useCart((state) => state.clearCart);
 
   const vegetables = filterCategory(cart, "vegetable");
   const fruits = filterCategory(cart, "fruit");
   const cheeses = filterCategory(cart, "cheese");
 
   const total = getTotal(cart);
+
+  const [createOrder, { error, loading }] = useMutation(CREATE_ORDER, {
+    onCompleted: () => {
+      setIsOpen(Boolean(false));
+      closeCart(Boolean(true));
+      clearCart();
+    },
+  });
+
+  if (loading) return "Submitting...";
+
+  if (error) return <Error error={error} />;
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -49,7 +65,29 @@ const Cart = ({ openCart, closeCart }) => {
     }
 
     setIsOpen(open);
-    closeCart();
+    closeCart(Boolean(false));
+  };
+
+  const handleBuy = (e) => {
+    e.preventDefault();
+
+    const products = cart.map((product) => {
+      return {
+        productId: product.id,
+        category: product.category,
+        unitPrice: product.unitPrice,
+        count: product.count,
+      };
+    });
+
+    createOrder({
+      variables: {
+        userName: "Ivana Batt",
+        currency: "euro",
+        totalPrice: total,
+        products: products,
+      },
+    });
   };
 
   return (
@@ -207,7 +245,11 @@ const Cart = ({ openCart, closeCart }) => {
 
             <div className="flex">
               <ListItem key={"buy"} className="flex justify-center">
-                <Button variant="outlined" color="secondary">
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={(e) => handleBuy(e)}
+                >
                   BUY
                 </Button>
               </ListItem>

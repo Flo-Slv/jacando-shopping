@@ -9,14 +9,29 @@ import useCart from "../utils/zustand/store.js";
 
 import Products from "./Products.jsx";
 import Cart from "./Cart.jsx";
+import Success from "./Success.jsx";
 
 const Layout = () => {
   const [displayCart, setDisplayCart] = useState(Boolean(false));
   const [displayProducts, setDisplayProducts] = useState("vegetable");
+  const [displaySuccess, setDisplaySuccess] = useState({
+    display: Boolean(false),
+    type: "",
+    message: "",
+  });
 
   const cart = useCart((state) => state.cart);
 
-  const handleCloseCart = () => setDisplayCart(Boolean(false));
+  const handleCloseCart = (order = Boolean(false)) => {
+    setDisplayCart(Boolean(false));
+
+    if (order)
+      setDisplaySuccess({
+        display: Boolean(true),
+        type: "",
+        message: "",
+      });
+  };
 
   const handleClickLink = (path) => setDisplayProducts(path);
 
@@ -114,7 +129,6 @@ const Layout = () => {
           </div>
         </Link>
       </aside>
-
       <div className="w-full h-full flex flex-col justify-between">
         <header className="h-16 w-full flex items-center relative justify-between px-5 space-x-10 bg-gray-800">
           <div>
@@ -167,7 +181,11 @@ const Layout = () => {
         </main>
 
         {displayCart && (
-          <Cart openCart={Boolean(true)} closeCart={() => handleCloseCart()} />
+          <Cart openCart={Boolean(true)} closeCart={handleCloseCart} />
+        )}
+
+        {displaySuccess.display && (
+          <Success type="order" setDisplaySuccess={setDisplaySuccess} />
         )}
       </div>
     </div>

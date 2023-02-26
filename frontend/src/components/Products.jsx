@@ -9,17 +9,19 @@ import GET_PRODUCTS_BY_CATEGORY from "../graphql/queries/getProductsByCategory.j
 import useCart from "../utils/zustand/store.js";
 
 import Loader from "./Loader.jsx";
-import Error from "./Error.jsx";
 import Success from "./Success.jsx";
+import Error from "./Error.jsx";
 
 const Products = ({ cat }) => {
-  const [displayAddToCart, setDisplayAddToCart] = useState({
+  const [displaySuccess, setDisplaySuccess] = useState({
     display: Boolean(false),
-    name: "",
+    type: "",
+    message: "",
   });
 
   const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     variables: { category: cat },
+    fetchPolicy: "no-cache",
   });
 
   const addToCart = useCart((state) => state.addToCart);
@@ -31,9 +33,10 @@ const Products = ({ cat }) => {
   const handleClickCart = (id, name, category, unitPrice) => {
     addToCart(id, name, category, unitPrice);
 
-    setDisplayAddToCart({
+    setDisplaySuccess({
       display: Boolean(true),
-      name: name,
+      type: "addToCart",
+      message: name,
     });
   };
 
@@ -109,10 +112,11 @@ const Products = ({ cat }) => {
           )
         )}
 
-      {displayAddToCart.display && (
+      {displaySuccess.display && (
         <Success
-          name={displayAddToCart.name}
-          setDisplayAddToCart={setDisplayAddToCart}
+          type="addToCart"
+          message={displaySuccess.message}
+          setDisplaySuccess={setDisplaySuccess}
         />
       )}
     </div>

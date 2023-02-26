@@ -7,16 +7,18 @@ const Alert = forwardRef((props, ref) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Success = ({ name, setDisplayAddToCart }) => {
+const Success = ({ type, message = "", setDisplaySuccess = () => {} }) => {
   const [open, setOpen] = useState(Boolean(true));
 
   const handleClose = (_, reason) => {
     if (reason === "clickaway") return;
 
     setOpen(Boolean(false));
-    setDisplayAddToCart({
+
+    setDisplaySuccess({
       display: Boolean(false),
-      name: "",
+      type: "",
+      message: "",
     });
   };
 
@@ -24,11 +26,13 @@ const Success = ({ name, setDisplayAddToCart }) => {
     <Snackbar
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       open={open}
-      autoHideDuration={3000}
+      autoHideDuration={type === "addToCart" ? 1000 : 2500}
       onClose={handleClose}
     >
       <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-        1 {name} successfully added to cart !
+        {type === "addToCart"
+          ? `1 ${message.toLowerCase()} added to cart !`
+          : `Your order is successfully created !`}
       </Alert>
     </Snackbar>
   );
