@@ -2,6 +2,13 @@ import { create } from "zustand";
 
 export const useCart = create((set) => ({
   cart: [],
+  clearCart: () =>
+    set((state) => {
+      return {
+        ...state,
+        cart: [],
+      };
+    }),
   addToCart: (id, name, category, unitPrice) =>
     set((state) => {
       const isPresent = state.cart.find((product) => product.id === id);
