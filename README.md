@@ -64,7 +64,7 @@ nodemon
 ### Frontend
 Dependencies
 ```sh
-express @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled clsx
+express @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled clsx zustand
 ```
 
 Dev dependencies
