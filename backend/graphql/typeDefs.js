@@ -35,6 +35,7 @@ const typeDefs = `#graphql
   type Query {
     getProducts: [Product!]
 		getProductById(productId: ID!): Product
+		getProductsCountByCategory(category: String!): Int!
 		getProductsByCategory(offset: Int!, limit: Int!, category: String!): [Product!]
   }
 
