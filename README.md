@@ -63,7 +63,7 @@ npm run dev
 
 ## Dependencies
 ### Backend
-Lis of dependencies
+List of dependencies
 ```sh
 @apollo/server express graphql cors body-parser mongoose dotenv
 ```
