@@ -23,26 +23,24 @@ const Products = ({ cat }) => {
     message: "",
   });
 
-  console.log("page: ", page);
-
   const count = useQuery(GET_PRODUCTS_COUNT_BY_CATEGORY, {
     variables: { category: cat },
   });
 
-  const { loading, error, data, refetch, fetchMore } = useQuery(
-    GET_PRODUCTS_BY_CATEGORY,
-    {
-      variables: { offset: 0, limit: 5, category: cat },
-    }
-  );
+  const { loading, error, data, refetch } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
+    variables: { offset: 0, limit: 5, category: cat },
+  });
 
   const addToCart = useStore((state) => state.addToCart);
   const refetchQueries = useStore((state) => state.refetchQueries);
 
   if (loading) return <Loader />;
 
+  // Handle GraphQL errors.
   if (error) return <Error error={error} />;
+  if (count.error) return <Error error={error} />;
 
+  // Refetch GET_PRODUCTS_BY_CATEGORY when order is done.
   if (refetchQueries) refetch({ category: cat });
 
   const handleClickCart = (id, name, category, unitPrice) => {
@@ -54,7 +52,31 @@ const Products = ({ cat }) => {
       message: name,
     });
   };
-  const handlePageChange = (_, value) => setPage(value);
+  const handlePageChange = (_, value) => {
+    if (value === 1) {
+      setPage(value);
+
+      refetch({ offset: 0 });
+    }
+
+    if (value === 2) {
+      setPage(value);
+
+      refetch({ offset: 5 });
+    }
+
+    if (value === 3) {
+      setPage(value);
+
+      refetch({ offset: 10 });
+    }
+
+    if (value === 4) {
+      setPage(value);
+
+      refetch({ offset: 15 });
+    }
+  };
 
   return (
     <div className="flex flex-col">
@@ -151,7 +173,9 @@ const Products = ({ cat }) => {
       <Stack spacing={2}>
         <Pagination
           count={
-            count ? Math.ceil(count.data.getProductsCountByCategory / 5) : 5
+            count && count?.data
+              ? Math.ceil(count?.data?.getProductsCountByCategory / 5)
+              : 5
           }
           color="secondary"
           page={page}
