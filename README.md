@@ -49,12 +49,12 @@ npm run dev
 
 ## Dependencies
 ### Backend
-Dependencies
+Lis of dependencies
 ```sh
 @apollo/server express graphql cors body-parser mongoose dotenv
 ```
 
-Dev dependencies
+List of dev dependencies
 ```sh
 nodemon
 ```
@@ -62,12 +62,12 @@ nodemon
 <br />
 
 ### Frontend
-Dependencies
+List of dependencies
 ```sh
 express @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled clsx zustand
 ```
 
-Dev dependencies
+List of dev dependencies
 ```sh
 vite@latest tailwindcss postcss autoprefixer
 ```
