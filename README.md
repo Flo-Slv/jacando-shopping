@@ -13,6 +13,12 @@ Frontend (SSR): Vite.js, Express, Apollo client, React router dom, React.js, Zus
 <br />
 
 ## Run project in dev
+```sh
+git clone https://github.com/Flo-Slv/jacando-shopping.git jacando-shopping
+```
+
+<br />
+
 ### Backend
 ```sh
 cd jacando-shopping/backend && \
@@ -23,11 +29,19 @@ npm install
 
 Create `.env` file
 ```env
+touch .env
+```
+
+<br />
+
+Add this line into `.env`
+```sh
 MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jacando-shopping?retryWrites=true&w=majority
 ```
 
 <br />
 
+Run backend server.
 ```sh
 npm run dev
 ```
@@ -49,12 +63,12 @@ npm run dev
 
 ## Dependencies
 ### Backend
-Dependencies
+Lis of dependencies
 ```sh
 @apollo/server express graphql cors body-parser mongoose dotenv
 ```
 
-Dev dependencies
+List of dev dependencies
 ```sh
 nodemon
 ```
@@ -62,12 +76,12 @@ nodemon
 <br />
 
 ### Frontend
-Dependencies
+List of dependencies
 ```sh
 express @apollo/client react-router-dom @mui/material @emotion/react @emotion/styled clsx zustand
 ```
 
-Dev dependencies
+List of dev dependencies
 ```sh
 vite@latest tailwindcss postcss autoprefixer
 ```
