@@ -13,6 +13,12 @@ Frontend (SSR): Vite.js, Express, Apollo client, React router dom, React.js, Zus
 <br />
 
 ## Run project in dev
+```sh
+git clone https://github.com/Flo-Slv/jacando-shopping.git jacando-shopping
+```
+
+<br />
+
 ### Backend
 ```sh
 cd jacando-shopping/backend && \
