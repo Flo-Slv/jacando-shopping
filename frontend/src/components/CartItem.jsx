@@ -1,13 +1,13 @@
 import ListItem from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
 
-import useCart from "../utils/zustand/store.js";
+import useStore from "../utils/zustand/store.js";
 
 const CartItem = ({ el }) => {
   const { id, name, category, count, unitPrice } = el;
 
-  const addToCart = useCart((state) => state.addToCart);
-  const removeFromCart = useCart((state) => state.removeFromCart);
+  const addToCart = useStore((state) => state.addToCart);
+  const removeFromCart = useStore((state) => state.removeFromCart);
 
   const handleClickPlus = (id, name, category, unitPrice) => {
     addToCart(id, name, category, unitPrice);
