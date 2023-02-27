@@ -12,7 +12,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 
-import ShopIcon from "@mui/icons-material/Shop";
+import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckout";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import useStore from "../utils/zustand/store.js";
 import CREATE_ORDER from "../graphql/mutations/createOrder.js";
@@ -233,7 +234,27 @@ const Cart = ({ openCart, closeCart }) => {
             <ListItem key={"total"} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <ShopIcon />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="black"
+                    viewBox="0 0 484.21 484.21"
+                    stroke="currentColor"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <g>
+                        {" "}
+                        <path d="M395.527,97.043V55.352H124.537l159.46,171.507c9.983,10.749,9.848,27.458-0.319,38.026L126.017,428.861h269.504v-25.18 c0-15.256,12.413-27.668,27.674-27.668c15.256,0,27.681,12.412,27.681,27.668v52.848c0,15.262-12.419,27.681-27.681,27.681H61.014 c-11.106,0-21.107-6.603-25.464-16.834c-4.359-10.226-2.189-22.012,5.509-30.026l184.584-191.964L40.743,46.521 c-7.492-8.068-9.496-19.798-5.101-29.899C40.042,6.525,50.005,0,61.014,0h362.188c15.255,0,27.68,12.413,27.68,27.68v69.363 c0,15.259-12.419,27.677-27.68,27.677C407.94,124.72,395.527,112.308,395.527,97.043z"></path>{" "}
+                      </g>{" "}
+                    </g>
+                  </svg>
                 </ListItemIcon>
                 <ListItemText primary={"TOTAL"} />
               </ListItemButton>
@@ -252,6 +273,7 @@ const Cart = ({ openCart, closeCart }) => {
                   color="secondary"
                   onClick={(e) => handleBuy(e)}
                 >
+                  <ShoppingCartCheckoutOutlinedIcon className="mr-1" />
                   BUY
                 </Button>
               </ListItem>
@@ -262,7 +284,8 @@ const Cart = ({ openCart, closeCart }) => {
                   color="primary"
                   onClick={toggleDrawer(Boolean(false))}
                 >
-                  GO BACK
+                  <ExitToAppOutlinedIcon className="mr-1" />
+                  CLOSE
                 </Button>
               </ListItem>
             </div>
