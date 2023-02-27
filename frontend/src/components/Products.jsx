@@ -172,7 +172,7 @@ const Products = ({ cat }) => {
         )}
       </div>
 
-      <Stack spacing={2}>
+      <Stack spacing={2} className="mb-4">
         <Pagination
           count={
             count && count?.data
