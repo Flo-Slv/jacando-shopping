@@ -52,37 +52,39 @@ const Products = ({ cat }) => {
       message: name,
     });
   };
+
   const handlePageChange = (_, value) => {
     if (value === 1) {
       setPage(value);
-
       refetch({ offset: 0 });
     }
 
     if (value === 2) {
       setPage(value);
-
       refetch({ offset: 5 });
     }
 
     if (value === 3) {
       setPage(value);
-
       refetch({ offset: 10 });
     }
 
     if (value === 4) {
       setPage(value);
-
       refetch({ offset: 15 });
     }
   };
 
   return (
-    <div className="flex flex-col">
+    <div
+      className={clsx(
+        "flex flex-col items-center w-full",
+        "mr-2 sm:mr-3 md:mr-6"
+      )}
+    >
       <div
         className={clsx(
-          "h-full w-full m-4 flex flex-wrap items-start justify-start",
+          "h-full w-full m-4 flex flex-wrap items-start justify-around",
           "rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll"
         )}
       >
