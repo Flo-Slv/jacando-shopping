@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import GET_PRODUCTS_BY_CATEGORY from "../graphql/queries/getProductsByCategory.js";
 
-import useCart from "../utils/zustand/store.js";
+import useStore from "../utils/zustand/store.js";
 
 import Loader from "./Loader.jsx";
 import Success from "./Success.jsx";
@@ -19,16 +19,18 @@ const Products = ({ cat }) => {
     message: "",
   });
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
+  const { loading, error, data, refetch } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     variables: { category: cat },
-    fetchPolicy: "no-cache",
   });
 
-  const addToCart = useCart((state) => state.addToCart);
+  const addToCart = useStore((state) => state.addToCart);
+  const refetchQueries = useStore((state) => state.refetchQueries);
 
   if (loading) return <Loader />;
 
   if (error) return <Error error={error} />;
+
+  if (refetchQueries) refetch({ category: cat });
 
   const handleClickCart = (id, name, category, unitPrice) => {
     addToCart(id, name, category, unitPrice);

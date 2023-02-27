@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 
 import ShopIcon from "@mui/icons-material/Shop";
 
-import useCart from "../utils/zustand/store.js";
+import useStore from "../utils/zustand/store.js";
 import CREATE_ORDER from "../graphql/mutations/createOrder.js";
 
 import CartItem from "./CartItem.jsx";
@@ -35,8 +35,9 @@ const getTotal = (cart) => {
 const Cart = ({ openCart, closeCart }) => {
   const [isOpen, setIsOpen] = useState(openCart);
 
-  const cart = useCart((state) => state.cart);
-  const clearCart = useCart((state) => state.clearCart);
+  const cart = useStore((state) => state.cart);
+  const clearCart = useStore((state) => state.clearCart);
+  const setRefetchQueries = useStore((state) => state.setRefetchQueries);
 
   const vegetables = filterCategory(cart, "vegetable");
   const fruits = filterCategory(cart, "fruit");
@@ -46,6 +47,7 @@ const Cart = ({ openCart, closeCart }) => {
 
   const [createOrder, { error, loading }] = useMutation(CREATE_ORDER, {
     onCompleted: () => {
+      setRefetchQueries(Boolean(true));
       setIsOpen(Boolean(false));
       closeCart(Boolean(true));
       clearCart();
