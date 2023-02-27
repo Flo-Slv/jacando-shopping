@@ -5,7 +5,7 @@ const orderMutations = {
   Mutation: {
     createOrder: async (_, { userName, currency, totalPrice, products }) => {
       try {
-        // To avoid duplicate products.
+        // Just a check to be sure to avoid duplicate products.
         const productsWithoutDuplicate = products.filter(
           (product, index, initialArray) => {
             return (
@@ -17,7 +17,7 @@ const orderMutations = {
           }
         );
 
-        // // Check if product exist in DB. If not, throw error.
+        // Check if product exist in DB. If not, throw error.
         productsWithoutDuplicate.forEach((product) => {
           Product.findById(product.productId, (err) => {
             if (err)
