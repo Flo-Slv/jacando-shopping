@@ -23,6 +23,11 @@ npm install
 
 Create `.env` file
 ```env
+touch .env
+```
+
+Add this line into `.env`.
+```sh
 MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jacando-shopping?retryWrites=true&w=majority
 ```
 
