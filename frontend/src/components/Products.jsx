@@ -54,6 +54,8 @@ const Products = ({ cat }) => {
   };
 
   const handlePageChange = (_, value) => {
+    // TODO:
+    // Find a better way instead of harcoded offset.
     if (value === 1) {
       setPage(value);
       refetch({ offset: 0 });
