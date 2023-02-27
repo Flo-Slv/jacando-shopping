@@ -21,11 +21,16 @@ const productQueries = {
         throw new Error(err);
       }
     },
-    getProductsByCategory: async (_, { category }) => {
+    getProductsByCategory: async (_, { offset, limit, category }) => {
       try {
-        const products = await Product.find({
-          category: category,
-        });
+        const products = await Product.find(
+          { category: category },
+          null, // optional fields to return
+          {
+            skip: offset,
+            limit: limit,
+          }
+        );
 
         if (products) return products;
         else throw new Error("Category not found !");
