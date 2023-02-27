@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useCart = create((set) => ({
+export const useStore = create((set) => ({
   cart: [],
   clearCart: () =>
     set((state) => {
@@ -72,6 +72,14 @@ export const useCart = create((set) => ({
         cart: updatedCart,
       };
     }),
+  refetchQueries: Boolean(false),
+  setRefetchQueries: (status) =>
+    set((state) => {
+      return {
+        ...state,
+        refetchQueries: status,
+      };
+    }),
 }));
 
-export default useCart;
+export default useStore;
