@@ -26,13 +26,16 @@ Create `.env` file
 touch .env
 ```
 
-Add this line into `.env`.
+<br />
+
+Add this line into `.env`
 ```sh
 MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jacando-shopping?retryWrites=true&w=majority
 ```
 
 <br />
 
+Run backend server.
 ```sh
 npm run dev
 ```
