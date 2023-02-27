@@ -5,7 +5,7 @@ import clsx from "clsx";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import useCart from "../utils/zustand/store.js";
+import useStore from "../utils/zustand/store.js";
 
 import Products from "./Products.jsx";
 import Cart from "./Cart.jsx";
@@ -27,7 +27,7 @@ const Layout = () => {
     message: "",
   });
 
-  const cart = useCart((state) => state.cart);
+  const cart = useStore((state) => state.cart);
 
   const handleCloseCart = (order = Boolean(false)) => {
     setDisplayCart(Boolean(false));
