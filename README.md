@@ -1,6 +1,8 @@
 # Jacando shopping
 A small shopping page.
 
+I did this project as a technical test for a company.
+
 Backend: Node.js, Express, Apollo server and GraphQL.
 
 Frontend (SSR): Vite.js, Express, Apollo client, React router dom, React.js, Zustand, Tailwind CSS and Material UI.
