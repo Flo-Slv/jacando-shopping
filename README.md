@@ -41,6 +41,8 @@ Add this line into `.env`
 MONGODB=mongodb+srv://FloSlv:jacando2023@jacandoshopping.kuekpne.mongodb.net/jacando-shopping?retryWrites=true&w=majority
 ```
 
+UPDATE: July 2023 - I deleted mongo DB.
+
 <br />
 
 Run backend server.
